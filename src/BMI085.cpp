@@ -817,13 +817,13 @@ bool BMI085Accel::setRange(Range range)
 /* sets the Int1 pin configuration */
 bool BMI085Accel::pinModeInt1(PinMode mode, PinLevel level)
 {
-  return pinModeInt1(PIN_OUTPUT,mode,level);
+  return pinModeInt1(BMI08x_PIN_OUTPUT,mode,level);
 }
 
 /* sets the Int2 pin configuration */
 bool BMI085Accel::pinModeInt2(PinMode mode, PinLevel level)
 {
-  return pinModeInt2(PIN_OUTPUT,mode,level);
+  return pinModeInt2(BMI08x_PIN_OUTPUT,mode,level);
 }
 
 /* maps the data ready signal to the Int1 pin */
@@ -923,11 +923,11 @@ bool BMI085Accel::pinModeInt1(PinIO io, PinMode mode, PinLevel level)
   uint8_t pin_io, pin_mode, active_lvl;
   readRegisters(ACC_INT1_IO_CTRL_ADDR,1,&readReg);
   switch (io) {
-    case PIN_INPUT: {
+    case BMI08x_PIN_INPUT: {
       pin_io = ACC_INT_INPUT;
       break;
     }
-    case PIN_OUTPUT: {
+    case BMI08x_PIN_OUTPUT: {
       pin_io = ACC_INT_OUTPUT;
       break;
     }
@@ -937,11 +937,11 @@ bool BMI085Accel::pinModeInt1(PinIO io, PinMode mode, PinLevel level)
     }
   }
   switch (mode) {
-    case PUSH_PULL: {
+    case BMI08x_PUSH_PULL: {
       pin_mode = ACC_INT_PUSHPULL;
       break;
     }
-    case OPEN_DRAIN: {
+    case BMI08x_OPEN_DRAIN: {
       pin_mode = ACC_INT_OPENDRAIN;
       break;
     }
@@ -951,11 +951,11 @@ bool BMI085Accel::pinModeInt1(PinIO io, PinMode mode, PinLevel level)
     }
   }
   switch (level) {
-    case ACTIVE_HIGH: {
+    case BMI08x_ACTIVE_HIGH: {
       active_lvl = ACC_INT_LVL_HIGH;
       break;
     }
-    case ACTIVE_LOW: {
+    case BMI08x_ACTIVE_LOW: {
       active_lvl = ACC_INT_LVL_LOW;
       break;
     }
@@ -978,11 +978,11 @@ bool BMI085Accel::pinModeInt2(PinIO io, PinMode mode, PinLevel level)
   uint8_t pin_io, pin_mode, active_lvl;
   readRegisters(ACC_INT2_IO_CTRL_ADDR,1,&readReg);
   switch (io) {
-    case PIN_INPUT: {
+    case BMI08x_PIN_INPUT: {
       pin_io = ACC_INT_INPUT;
       break;
     }
-    case PIN_OUTPUT: {
+    case BMI08x_PIN_OUTPUT: {
       pin_io = ACC_INT_OUTPUT;
       break;
     }
@@ -992,11 +992,11 @@ bool BMI085Accel::pinModeInt2(PinIO io, PinMode mode, PinLevel level)
     }
   }
   switch (mode) {
-    case PUSH_PULL: {
+    case BMI08x_PUSH_PULL: {
       pin_mode = ACC_INT_PUSHPULL;
       break;
     }
-    case OPEN_DRAIN: {
+    case BMI08x_OPEN_DRAIN: {
       pin_mode = ACC_INT_OPENDRAIN;
       break;
     }
@@ -1006,11 +1006,11 @@ bool BMI085Accel::pinModeInt2(PinIO io, PinMode mode, PinLevel level)
     }
   }
   switch (level) {
-    case ACTIVE_HIGH: {
+    case BMI08x_ACTIVE_HIGH: {
       active_lvl = ACC_INT_LVL_HIGH;
       break;
     }
-    case ACTIVE_LOW: {
+    case BMI08x_ACTIVE_LOW: {
       active_lvl = ACC_INT_LVL_LOW;
       break;
     }
@@ -1308,11 +1308,11 @@ bool BMI085Gyro::pinModeInt3(PinMode mode, PinLevel level)
   uint8_t pin_mode, active_lvl;
   readRegisters(GYRO_INT3_IO_CTRL_ADDR,1,&readReg);
   switch (mode) {
-    case PUSH_PULL: {
+    case BMI08x_PUSH_PULL: {
       pin_mode = GYRO_INT_PUSHPULL;
       break;
     }
-    case OPEN_DRAIN: {
+    case BMI08x_OPEN_DRAIN: {
       pin_mode = GYRO_INT_OPENDRAIN;
       break;
     }
@@ -1322,11 +1322,11 @@ bool BMI085Gyro::pinModeInt3(PinMode mode, PinLevel level)
     }
   }
   switch (level) {
-    case ACTIVE_HIGH: {
+    case BMI08x_ACTIVE_HIGH: {
       active_lvl = GYRO_INT_LVL_HIGH;
       break;
     }
-    case ACTIVE_LOW: {
+    case BMI08x_ACTIVE_LOW: {
       active_lvl = GYRO_INT_LVL_LOW;
       break;
     }
@@ -1349,11 +1349,11 @@ bool BMI085Gyro::pinModeInt4(PinMode mode, PinLevel level)
   uint8_t pin_mode, active_lvl;
   readRegisters(GYRO_INT4_IO_CTRL_ADDR,1,&readReg);
   switch (mode) {
-    case PUSH_PULL: {
+    case BMI08x_PUSH_PULL: {
       pin_mode = GYRO_INT_PUSHPULL;
       break;
     }
-    case OPEN_DRAIN: {
+    case BMI08x_OPEN_DRAIN: {
       pin_mode = GYRO_INT_OPENDRAIN;
       break;
     }
@@ -1363,11 +1363,11 @@ bool BMI085Gyro::pinModeInt4(PinMode mode, PinLevel level)
     }
   }
   switch (level) {
-    case ACTIVE_HIGH: {
+    case BMI08x_ACTIVE_HIGH: {
       active_lvl = GYRO_INT_LVL_HIGH;
       break;
     }
-    case ACTIVE_LOW: {
+    case BMI08x_ACTIVE_LOW: {
       active_lvl = GYRO_INT_LVL_LOW;
       break;
     }
@@ -1565,7 +1565,7 @@ int BMI085::begin()
     return -5000;
   }
   // set default drdy pin settings
-  if (!pinModeDrdy(PUSH_PULL,ACTIVE_HIGH)) {
+  if (!pinModeDrdy(BMI08x_PUSH_PULL,BMI08x_ACTIVE_HIGH)) {
     return -6000;
   } 
   return 1;
@@ -1635,7 +1635,7 @@ bool BMI085::mapDrdy(DrdyPin pin)
 {
   switch (pin) {
     case PIN_1: {
-      if(!accel->pinModeInt2(BMI085Accel::PIN_INPUT,BMI085Accel::PUSH_PULL,BMI085Accel::ACTIVE_HIGH)) {
+      if(!accel->pinModeInt2(BMI085Accel::BMI08x_PIN_INPUT,BMI085Accel::BMI08x_PUSH_PULL,BMI085Accel::BMI08x_ACTIVE_HIGH)) {
         return false;
       }
       accel->writeRegister(ACC_INT1_MAP_ADDR,ACC_INTA_ENABLE);
@@ -1643,7 +1643,7 @@ bool BMI085::mapDrdy(DrdyPin pin)
       return true;
     }
     case PIN_2: {
-      if(!accel->pinModeInt1(BMI085Accel::PIN_INPUT,BMI085Accel::PUSH_PULL,BMI085Accel::ACTIVE_HIGH)) {
+      if(!accel->pinModeInt1(BMI085Accel::BMI08x_PIN_INPUT,BMI085Accel::BMI08x_PUSH_PULL,BMI085Accel::BMI08x_ACTIVE_HIGH)) {
         return false;
       }
       accel->writeRegister(ACC_INT2_MAP_ADDR,ACC_INTA_ENABLE);
@@ -1651,7 +1651,7 @@ bool BMI085::mapDrdy(DrdyPin pin)
       return true;
     }
     default: {
-      if(!accel->pinModeInt1(BMI085Accel::PIN_INPUT,BMI085Accel::PUSH_PULL,BMI085Accel::ACTIVE_HIGH)) {
+      if(!accel->pinModeInt1(BMI085Accel::BMI08x_PIN_INPUT,BMI085Accel::BMI08x_PUSH_PULL,BMI085Accel::BMI08x_ACTIVE_HIGH)) {
         return false;
       }
       accel->writeRegister(ACC_INT2_MAP_ADDR,ACC_INTA_ENABLE);
@@ -1689,7 +1689,7 @@ bool BMI085::mapSync(SyncPin pin)
 {
   switch (pin) {
     case PIN_3: {
-      if (!gyro->pinModeInt3(BMI085Gyro::PUSH_PULL,BMI085Gyro::ACTIVE_HIGH)) {
+      if (!gyro->pinModeInt3(BMI085Gyro::BMI08x_PUSH_PULL,BMI085Gyro::BMI08x_ACTIVE_HIGH)) {
         return false;
       }
       if (!gyro->mapDrdyInt3(true)) {
@@ -1698,7 +1698,7 @@ bool BMI085::mapSync(SyncPin pin)
       return true;
     }
     case PIN_4: {
-      if (!gyro->pinModeInt4(BMI085Gyro::PUSH_PULL,BMI085Gyro::ACTIVE_HIGH)) {
+      if (!gyro->pinModeInt4(BMI085Gyro::BMI08x_PUSH_PULL,BMI085Gyro::BMI08x_ACTIVE_HIGH)) {
         return false;
       }
       if (!gyro->mapDrdyInt4(true)) {
@@ -1707,7 +1707,7 @@ bool BMI085::mapSync(SyncPin pin)
       return true;
     }
     default: {
-      if (!gyro->pinModeInt3(BMI085Gyro::PUSH_PULL,BMI085Gyro::ACTIVE_HIGH)) {
+      if (!gyro->pinModeInt3(BMI085Gyro::BMI08x_PUSH_PULL,BMI085Gyro::BMI08x_ACTIVE_HIGH)) {
         return false;
       }
       if (!gyro->mapDrdyInt3(true)) {

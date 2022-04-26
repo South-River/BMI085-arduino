@@ -65,12 +65,12 @@ class BMI085Accel {
       ODR_12_5HZ_BW_1HZ
     };
     enum PinMode {
-      PUSH_PULL,
-      OPEN_DRAIN
+      BMI08x_PUSH_PULL,
+      BMI08x_OPEN_DRAIN
     };
     enum PinLevel {
-      ACTIVE_HIGH,
-      ACTIVE_LOW
+      BMI08x_ACTIVE_HIGH,
+      BMI08x_ACTIVE_LOW
     };
     BMI085Accel(TwoWire &bus,uint8_t address);
     BMI085Accel(SPIClass &bus,uint8_t csPin);
@@ -94,8 +94,8 @@ class BMI085Accel {
     friend class BMI085;
     // int pin input or output selection
     enum PinIO {
-      PIN_INPUT,
-      PIN_OUTPUT
+      BMI08x_PIN_INPUT,
+      BMI08x_PIN_OUTPUT
     };
     // i2c
     uint8_t _address;
@@ -226,12 +226,12 @@ class BMI085Gyro {
       ODR_100HZ_BW_32HZ = 0x87
     };
     enum PinMode {
-      PUSH_PULL,
-      OPEN_DRAIN
+      BMI08x_PUSH_PULL,
+      BMI08x_OPEN_DRAIN
     };
     enum PinLevel {
-      ACTIVE_HIGH,
-      ACTIVE_LOW
+      BMI08x_ACTIVE_HIGH,
+      BMI08x_ACTIVE_LOW
     };
     BMI085Gyro(TwoWire &bus,uint8_t address);
     BMI085Gyro(SPIClass &bus,uint8_t csPin);
@@ -250,9 +250,9 @@ class BMI085Gyro {
   private:
     // available power settings
     enum PowerMode {
-      PWR_NORMAL = 0x00,
-      PWR_SUSPEND = 0x80,
-      PWR_DEEP_SUSPEND = 0x20
+      BMI08x_PWR_NORMAL = 0x00,
+      BMI08x_PWR_SUSPEND = 0x80,
+      BMI08x_PWR_DEEP_SUSPEND = 0x20
     };
     // i2c
     uint8_t _address;
@@ -361,12 +361,12 @@ class BMI085 {
       PIN_4
     };
     enum PinMode {
-      PUSH_PULL,
-      OPEN_DRAIN
+      BMI08x_PUSH_PULL,
+      BMI08x_OPEN_DRAIN
     };
     enum PinLevel {
-      ACTIVE_HIGH,
-      ACTIVE_LOW
+      BMI08x_ACTIVE_HIGH,
+      BMI08x_ACTIVE_LOW
     };
     BMI085(TwoWire &bus,uint8_t accel_addr,uint8_t gyro_addr);
     BMI085(SPIClass &bus,uint8_t accel_cs,uint8_t gyro_cs);
